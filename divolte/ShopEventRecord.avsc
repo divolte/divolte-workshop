@@ -13,6 +13,12 @@
         { "name": "sessionId",       "type": ["null", "string"], "default": null },
         { "name": "pageViewId",      "type": ["null", "string"], "default": null },
         { "name": "eventId",         "type": ["null", "string"], "default": null },
-        { "name": "eventType",       "type": "string",           "default": "unknown" }
+        { "name": "eventType",       "type": "string",           "default": "unknown" },
+
+        { "name": "pageType",        "type": "string",           "default": "unknown" },
+        { "name": "page",            "type": ["null", "int"],    "default": null },
+        { "name": "productId",       "type": ["null", "string"], "default": null },
+        { "name": "downloadId",      "type": ["null", "string"], "default": null },
+        { "name": "category",        "type": ["null", "string"], "default": null }
     ]
 }
