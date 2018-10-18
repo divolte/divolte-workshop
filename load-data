@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Load the data.
+#
+
+# Abort on first error.
+set -e
+
+PROGNAME="${0##*/}"
+PROGDIR="${0%/*}"
+cd "${PROGDIR}"
+
+docker build -t catalog-builder:latest catalog-builder
+docker run --rm --volume "${PWD}/data/categories:/data/categories" --workdir / --network host --env PYTHONUNBUFFERED=1 \
+    catalog-builder ./data/categories/*.json

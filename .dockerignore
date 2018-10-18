@@ -1,0 +1,20 @@
+# IntelliJ project files.
+.idea/
+**/*.iml
+
+# macOS droppings.
+**/.DS_Store
+
+# Python bytecode.
+**/__pycache__/
+**/*.py[cod]
+
+# Gradle project files.
+**/.gradle/
+**/build/
+
+# Eclipse project files.
+**/.project
+**/.classpath
+**/.settings/
+**/bin/

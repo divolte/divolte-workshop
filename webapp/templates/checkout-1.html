@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12"><h1>Checkout (step 1 of 2)</h1></div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <form action="/checkout/" method="POST">
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Please provide your e-mail address">
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" checked>Do not send SPAM.
+          </label>
+        </div>
+        <input type="hidden" name="step" value="1">
+        <button type="submit" class="btn btn-lg btn-success">On to step 2</button>
+      </form>
+    </div>
+  </div>
+{% end %}

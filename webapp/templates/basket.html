@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script>
+function trashItem(id) {
+    // INSERT divolte.signal() CALL HERE.
+
+    $.post('/basket/', { action: 'delete', item_id: id }, function() {
+        divolte.whenCommitted(function() {
+            location.reload()
+        }, 5000);
+    }).fail(function() {
+        alert('BROKEN!')
+    })
+}
+</script>
+  {% if not basket['items'] %}
+    <div class="row">
+      <div class="col-md-12"><strong>There are no items in you basket. Go shopping!</strong></div>
+    </div>
+  {% else %}
+    {% for item in basket['items'] %}
+      <div class="row">
+        <div class="col-md-2">
+          <a href="/product/{{ item['id'] }}/">
+            <img src="{{ item['variants']['Square']['img_source'] }}" class="img-response img-circle"/>
+          </a>
+        </div>
+        <div class="col-md-6 vbottom">
+            <h4><a href="/product/{{ item['id'] }}/">{{ item['title'] }}</a></h4>
+            <p>Photo by {{ item['owner']['real_name'] or item['owner']['user_name']}}</p>
+        </div>
+        <div class="col-md-2">
+          <span class="price">{{ item['price'] }} CAPTCHA {{ 'point' if item['price'] == 1 else 'points' }}</span>
+        </div>
+        <div class="col-md-1">
+          <a class="trash" href="#" onclick="trashItem({{ item['id'] }})"><i class="fa fa-trash-o"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-11"><hr/></div>
+      </div>
+    {% end %}
+      <div class="row">
+        <div class="col-md-2 col-md-offset-6">
+          <strong>Grand total:</strong>
+        </div>
+        <div class="col-md-3">
+          <span class="price"><strong>{{ sum([item['price'] for item in basket['items']]) }} CAPTCHA {{ 'point' if sum([item['price'] for item in basket['items']]) == 1 else 'points' }}</strong></span>
+        </div>
+      </div>
+      <div class="row">
+        <hr/>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-md-offset-8">
+          <a href="/checkout/" class="btn btn-lg btn-success" role="button">Buy {{ len(basket['items']) }} items</a>
+        </div>
+      </div>
+  {% end %}
+{% end %}

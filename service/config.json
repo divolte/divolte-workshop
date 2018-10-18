@@ -1,0 +1,5 @@
+{
+  "elasticsearch_hosts" : ["127.0.0.1"],
+  "elasticsearch_port": 9200,
+  "elasticsearch_cluster_name": "elasticsearch_cluster"
+}

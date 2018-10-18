@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Get your original photos</h1>
+    </div>
+  </div>
+  {% for item in items %}
+    <div class="row">
+      <div class="col-md-2">
+        <a href="/product/{{ item['id'] }}/">
+          <img src="{{ item['variants']['Square']['img_source'] }}" class="img-response img-circle"/>
+        </a>
+      </div>
+      <div class="col-md-5 vbottom">
+        <h4><a href="/product/{{ item['id'] }}/">{{ item['title'] }}</a></h4>
+        <p>Photo by {{ item['owner']['real_name'] or item['owner']['user_name']}}</p>
+      </div>
+      <div class="col-md-5">
+        <p>
+          <a href="{{ item['variants']['Original']['img_source'] }}" class="btn btn-primary" role="button">Go to original image</a>&nbsp;
+          <a href="{{ item['variants']['Original']['flickr_url'] }}" class="btn btn-default" role="button">Go to Flickr page</a>&nbsp;
+          <!-- <a href="#" class="btn btn-default" role="button">Go to Flickr page</a> -->
+          <!-- {{ item }} -->
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-11"><hr/></div>
+    </div>
+  {% end %}
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h4>You can bookmark this page for later reference!</h4>
+    </div>
+  </div>
+{% end %}

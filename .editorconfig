@@ -1,0 +1,16 @@
+# Top-most EditorConfig file.
+root = true
+
+# Universal settings.
+[*]
+indent_style = space
+indent_size = 4
+tab_width = 8
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Some exceptions for HTML, HOCON, JavaScript and Documentation (ReStructuredText).
+[*.{html,conf,js,rst}]
+indent_size = 2

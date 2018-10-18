@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include add-to-basket.html %}
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="previewModal" aria-hidden="true" id="preview-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <h5 class="modal-title">{{ item['title'] }}</h5>
+      </div>
+      <div class="modal-body">
+        <p>
+          <img class="img-responsive img-rounded center-block" src="{{ item['variants']['Medium']['img_source'] }}"/>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Invoked when the user previews an item.
+function itemPreviewed(id) {
+  // INSERT divolte.signal() CALL HERE.
+}
+</script>
+
+  <div class="row">
+    <div class="col-md-3 text-center">
+      <h1>
+        <a href="#" data-toggle="modal" data-target="#preview-modal" onclick="itemPreviewed({{ item['id'] }});">
+          <img src="{{ item['variants']['Small']['img_source'] }}" class="img-responsive img-rounded center-block" onclick="console.log('whatever')">
+        </a>
+      </h1>
+      <span class="preview-text">(Click for a larger view.)</span>
+    </div>
+    <div class="col-md-9">
+      <h2>{{ item['title'] }}</h2>
+      <h4>Photo by {{ item['owner']['real_name'] or item['owner']['user_name']}}</h4>
+      <p class="description">
+        {% raw item['description'] %}
+      </p>
+      <p>
+        <span class="price">{{ item['price'] }} CAPTCHA {{ 'point' if item['price'] == 1 else 'points' }}</span><br/>
+        <span class="availability">Available in {% raw '%d&times;%d' % max([(v['width'],v['height']) for v in item['variants'].values()]) %}.</span>
+      </p>
+      <p>
+        <button class="btn btn-success btn-lg" onclick="addToBasket({{ item['id'] }})">Add to basket</button>
+      </p>
+      <p>
+        <a href="{{ ref }}">Back to overview&hellip;</a>
+    </div>
+  </div>
+{% end %}

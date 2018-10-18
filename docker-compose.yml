@@ -1,0 +1,72 @@
+version: "3.3"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
+    container_name: elasticsearch
+    hostname: elasticsearch
+    environment:
+      - cluster.name=elasticsearch
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - network.bind_host=0.0.0.0
+      - network.publish_host=elasticsearch
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    networks:
+      - workshop
+  divolte:
+    build:
+      context: ./divolte
+    container_name: divolte
+    hostname: divolte
+    volumes:
+      - clickdata:/data
+    ports:
+      - "127.0.0.1:8290:8290"
+    networks:
+      - workshop
+  # Divolte shop service
+  shop-service:
+    build:
+      context: ./service
+    container_name: shop-service
+    hostname: shop-service
+    environment:
+      ELASTICSEARCH_HOSTS: '["elasticsearch"]'
+      ELASTICSEARCH_CLUSTER_NAME: elasticsearch
+      JAVA_OPTS: "-Xms512m -Xmx512m"
+    ports:
+      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:8081:8081"
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch
+    networks:
+      - workshop
+  shop-webapp:
+    build:
+      context: ./webapp
+    container_name: shop-webapp
+    hostname: shop-webapp
+    environment:
+      SHOP_API_URL: "http://shop-service:8080/api"
+      SHOP_DIVOLTE_URL: "http://localhost:8290/divolte.js"
+      SHOP_WEBAPP_SECRET: "foo"
+      SHOP_WEBAPP_PORT: 9011
+    ports:
+      - "127.0.0.1:9011:9011"
+    depends_on:
+      - divolte
+      - shop-service
+    links:
+      - divolte
+      - shop-service
+    networks:
+      - workshop
+
+networks:
+  workshop:
+    driver: bridge
+
+volumes:
+  clickdata:

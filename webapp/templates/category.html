@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include add-to-basket.html %}
+
+  {% try %}
+    {% if query is not None %}
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Search results for {{ query }}.</h1>
+        </div>
+      </div>
+    {% end %}
+  {% except NameError %}
+  {% end %}
+
+  {% for row in grouper(items, 3) %}
+    <div class="row">
+    {% for item in row %}
+      {% if item %}
+        <div class="col-md-2 text-center">
+          <a href="/product/{{ item['id'] }}/">
+            <img src="{{ item['variants']['Large Square']['img_source'] }}" class="img-responsive img-thumbnail"><br/>
+            Photo by {{ item['owner']['real_name'] or item['owner']['user_name']}}<br/><br/>
+          </a>
+        </div>
+        <div class="col-md-2">
+          <span class="price">{{ item['price'] }} CAPTCHA {{ 'point' if item['price'] == 1 else 'points' }}</span><br/>
+          <span class="availability">Available in {% raw '%d&times;%d' % max([(v['width'],v['height']) for v in item['variants'].values()]) %}.</span><br/>
+          <span class="details"><a href="/product/{{ item['id'] }}/">See details&hellip;</a></span><br/>
+          <br/><br/>
+          <button class="btn btn-success btn-sm" href="/basket-add/{{ item['id'] }}/" onclick="addToBasket({{ item['id'] }})">Add to basket</button>
+        </div>
+      {% else %}
+        <div class="col-md-4">&nbsp;</div>
+      {% end %}
+    {% end %}
+    </div>
+  {% end %}
+
+<div class="row">
+  <div class="col-md-12 text-center">
+    <nav>
+      <ul class="pagination pagination-sm">
+        <li {% if not prev_enabled %}class="disabled"{% end %}>
+          <a href="{{ prev_url }}" aria-label="Previous" {% if not prev_enabled %}onclick="return false"{% end %}>
+            <span aria-hidden="true">Previous page</span>
+          </a>
+        </li>
+        {% for p in range(int(total / items_per_page) + 1) %}
+        <li {% if page == p %}class="active"{% end %}><a href="{{ page_url.replace('%p', str(p)) }}">{{ p + 1 }}</a></li>
+        {% end %}
+        <li {% if not next_enabled %}class="disabled"{% end %}>
+          <a href="{{ next_url }}" aria-label="Next" {% if not next_enabled %}onclick="return false"{% end %}>
+            <span aria-hidden="true">Next page</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+{% end %}

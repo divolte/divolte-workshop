@@ -1,0 +1,74 @@
+{
+  "_source": {
+    "enabled": true
+  },
+  "dynamic": false,
+  "properties": {
+    "title": {
+      "type": "text",
+      "analyzer": "catalog"
+    },
+    "description": {
+      "type": "text",
+      "analyzer": "catalog"
+    },
+    "tags": {
+      "type": "keyword"
+    },
+    "categories": {
+      "type": "keyword"
+    },
+    "favs": {
+      "type": "integer",
+      "index": "false"
+    },
+    "price": {
+      "type": "integer",
+      "index": "false"
+    },
+    "owner": {
+      "type": "object",
+      "enabled": true,
+      "dynamic": false,
+      "properties": {
+        "user_id": {
+          "type": "keyword"
+          },
+          "user_name": {
+            "type": "text",
+            "index": false
+          },
+          "real_name": {
+            "type": "text",
+            "index": false
+          }
+        }
+      },
+      "variants": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "text",
+            "index": false
+          },
+          "flickr_url": {
+            "type": "text",
+            "index": false
+          },
+          "img_source": {
+            "type": "text",
+            "index": false
+          },
+          "width": {
+            "type": "integer",
+            "index": false
+          },
+          "height": {
+            "type": "integer",
+            "index": false
+          }
+        }
+      }
+    }
+  }
+}

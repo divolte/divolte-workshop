@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Refresh the stack based on local changes.
+#
+
+# Abort on first error.
+set -e
+
+PROGNAME="${0##*/}"
+PROGDIR="${0%/*}"
+cd "${PROGDIR}"
+
+# Two simple steps:
+# 1. Build everything.
+# 2. "up" the stack, which will restart changed images.
+docker-compose build
+docker-compose up --detach

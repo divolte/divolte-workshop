@@ -1,0 +1,35 @@
+body {
+  padding-top: 70px;
+}
+
+.basket {
+  font-size: 24px;
+}
+
+
+.price {
+  color: firebrick;
+  font-weight: lighter;
+}
+
+.availability {
+  color: green;
+  font-weight: lighter;
+}
+
+.details {
+  font-weight: lighter;
+}
+
+.description {
+  font-weight: lighter;
+}
+
+.preview-text {
+  font-weight: lighter;
+}
+
+.vbottom {
+  vertical-align: bottom;
+  height: 100%;
+}

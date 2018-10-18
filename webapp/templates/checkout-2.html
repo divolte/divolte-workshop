@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-12"><h1>Checkout (step 2 of 2)</h1></div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <form action="/checkout/" method="POST">
+        {% for i in range(len(checkout['tokens'])) %}
+        <div class="form-group">
+          <img class="img-responsive" src="/captcha/{{ i }}/"></img>
+          <label for="token{{ i }}">Response</label>
+          <input type="text" class="form-control" id="token{{ i }}" name="token{{ i }}" placeholder="CAPTCHA response">
+        </div>
+        {% end %}
+        <input type="hidden" name="step" value="2">
+        <button type="submit" class="btn btn-lg btn-success">Get my photos!</button>
+      </form>
+    </div>
+  </div>
+{% end %}

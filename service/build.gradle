@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'maven'
+    id 'com.github.johnrengelman.shadow' version '2.0.2'
+}
+
+repositories {
+    mavenCentral()
+}
+
+group = 'io.divolte.shop'
+version = '0.1-SNAPSHOT'
+description = """shop-service"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'io.divolte.shop.Main'
+    }
+    mergeServiceFiles()
+}
+
+build.dependsOn shadowJar
+
+dependencies {
+    compile group: 'org.elasticsearch', name: 'elasticsearch', version: '6.4.0'
+    compile group: 'org.elasticsearch.client', name: 'elasticsearch-rest-high-level-client', version: '6.4.0'
+    compile group: 'com.google.guava', name: 'guava', version: '24.0-jre'
+    compile group: 'io.dropwizard', name: 'dropwizard-core', version: '1.2.3'
+    compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.4.0'
+    compile group: 'com.github.cage', name: 'cage', version: '1.0'
+    compile group: 'org.hibernate', name: 'hibernate-validator', version: '5.4.2.Final'
+
+    compileClasspath group: 'org.hibernate', name: 'hibernate-validator-annotation-processor', version: '5.4.2.Final'
+    annotationProcessor group: 'org.hibernate', name: 'hibernate-validator-annotation-processor', version: '5.4.2.Final'
+}

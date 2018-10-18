@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# Display a bunch of Avro files, as JSON.
+#
+
+# Abort on first error.
+set -e
+
+avro2json() {
+    for file in "$@"
+    do
+        /opt/divolte/divolte-collector/bin/avro-tools tojson "${file}" 2>/dev/null | grep '^{'
+    done
+}
+
+if [ -n "$1" ]
+then
+    avro2json "$@"
+else
+    avro2json /data/*.avro
+fi
