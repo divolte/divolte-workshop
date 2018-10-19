@@ -16,6 +16,7 @@
 <script>
 function addToBasket(id) {
   // INSERT divolte.signal() CALL HERE.
+  divolte.signal('addToBasket', { item_id: id })
 
   $.post('/basket/', { action: 'add', item_id: id }, function() {
     $('#basket-modal').modal('show')

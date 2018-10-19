@@ -45,4 +45,20 @@ mapping {
     }
 
     // EXERCISE 3: INSERT SECTION HERE
+    section {
+        when eventType().equalTo('removeFromBasket') apply {
+            map eventParameters().value('item_id') onto 'productId'
+            exit()
+        }
+
+        when eventType().equalTo('addToBasket') apply {
+            map eventParameters().value('item_id') onto 'productId'
+            exit()
+        }
+
+        when eventType().equalTo('preview') apply {
+            map eventParameters().value('item_id') onto 'productId'
+            exit()
+        }
+    }
 }

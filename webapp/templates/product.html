@@ -21,7 +21,7 @@
 <script>
 // Invoked when the user previews an item.
 function itemPreviewed(id) {
-  // INSERT divolte.signal() CALL HERE.
+  divolte.signal('preview', { item_id: id })
 }
 </script>
 

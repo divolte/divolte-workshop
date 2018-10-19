@@ -4,6 +4,7 @@
 <script>
 function trashItem(id) {
     // INSERT divolte.signal() CALL HERE.
+    divolte.signal('removeFromBasket', { item_id: id })
 
     $.post('/basket/', { action: 'delete', item_id: id }, function() {
         divolte.whenCommitted(function() {
