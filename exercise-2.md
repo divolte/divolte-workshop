@@ -27,8 +27,8 @@ The first thing we're going to do is update our schema to include the additional
 
 3. Restart the stack with your new schema and check the Divolte logs to make sure everything started up properly:
 
-       % ./refresh
-       % docker-compose logs -f divolte
+        % ./refresh
+        % docker-compose logs -f divolte
 
    If everything startup properly you should see something like:
 
@@ -46,7 +46,7 @@ The first thing we're going to do is update our schema to include the additional
 
 5. After waiting for a minute or so, examine the events again:
 
-       % docker-compose run divolte show-avro
+        % docker-compose run divolte show-avro
 
    The most recent events should now include the additional fields, although for now they're empty…
 
@@ -95,14 +95,14 @@ In the first step we updated our schema to include some additional fields. In th
 
 3. Once again restart the stack with your new schema and check the Divolte logs to make sure everything started up properly:
 
-       % ./refresh
-       % docker-compose logs -f divolte
+        % ./refresh
+        % docker-compose logs -f divolte
 
 4. Browse to the shop ([http://localhost:9011/](http://localhost:9011/)), and click around a bit.
 
 5. After waiting for a minute or so, examine the events again:
 
-       % docker-compose run divolte show-avro
+        % docker-compose run divolte show-avro
 
    The most recent events should now include the additional fields with values filled in from the mapping.
 
