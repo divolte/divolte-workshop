@@ -50,7 +50,7 @@ At the moment our web shop looks nice but doesn't include the Divolte tag. To ad
 
 3. Restart the web application:
 
-       % ./refresh
+        % ./refresh
 
 4. In your browser, reload the shop. Check that `divolte.js` is being loaded.
 
@@ -67,11 +67,11 @@ Now that the tag is present and you've been clicking around the site, there shou
 
 1. The Divolte container is saving its data to a volume mounted on `/data`. Every 30 seconds a new file appears there, so long as some clicks have been received. To see the Avro files:
 
-       % docker-compose run divolte ls -l /data
+        % docker-compose run divolte ls -l /data
 
 2. If you wish, you can see the content of the events in the clickstream using a utility script in the container.
 
-       % docker-compose run divolte show-avro
+        % docker-compose run divolte show-avro
 
    For those familiar with Avro: this is just a wrapper around the `avro-tools tojson` command.
 
