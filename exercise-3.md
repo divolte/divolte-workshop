@@ -72,7 +72,7 @@ section {
 }
 ```
 
-Restart the stack (`./refresh`) and ensure that Divolte started up properly using `divolte-compose logs -f divolte`.
+Restart the stack (`./refresh`) and ensure that Divolte started up properly using `docker-compose logs -f divolte`.
 
 Browse around the site [http://localhost:9011/](http://localhost:9011/), making sure you:
 
